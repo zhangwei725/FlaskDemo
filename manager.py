@@ -1,7 +1,10 @@
 from flask_script import Manager, Server
-from flask import Flask
+from flask import Flask, render_template
+"""
 
+"""
 app = Flask(__name__)
+app.debug = True
 
 # 参数  Flask对象的实例
 
@@ -17,10 +20,10 @@ def show():
 # @app.route
 @app.route('/')
 def index():
-    return '6666'
+    return render_template('index.html')
 
 
-@app.route('/list/<page>/<size>')
+@app.route('/list/<page>/<string:size>', methods=['GET', 'POST'])
 def list(page, size):
     print(type(page))
     print(type(size))
@@ -38,7 +41,6 @@ def list1(page, size):
 def list_path(path):
     print(type(path))
     return '6666'
-
 
 # 添加脚本
 manager.add_command('start', Server(host='127.0.0.1', port=9000))
